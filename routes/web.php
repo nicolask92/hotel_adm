@@ -11,6 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('inicio');
+Route::get('/','ControladordeVistas@inicio')->name('inicio');
+
+Route::get('cronograma', function () {
+    return view('cronograma');
+})->name('crono');
+
+Route::get('empleados', function () {
+    return view('empleados');
+})->name('empleados');
+
+Route::get('pago-servicios', function () {
+    return view('pago-servicios');
+})->name('pago-servicios');
