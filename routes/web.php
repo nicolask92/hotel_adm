@@ -13,14 +13,8 @@
 
 Route::get('/','ControladordeVistas@inicio')->name('inicio');
 
-Route::get('cronograma', function () {
-    return view('cronograma');
-})->name('crono');
+Route::get('cronograma','ControladordeVistas@cronograma')->name('crono');
 
-Route::get('empleados', function () {
-    return view('empleados');
-})->name('empleados');
+Route::get('empleados/{empleado?}','ControladordeVistas@empleados')->name('empleados');
 
-Route::get('pago-servicios', function () {
-    return view('pago-servicios');
-})->name('pago-servicios');
+Route::get('pago-servicios', 'ControladordeVistas@pago_servicios')->name('pago-servicios');

@@ -28,9 +28,9 @@
     </div>
 
     <div class="container border mt-3 mb-3">
-    <h3 class="p-3 mb-2 text-center font-weight-bold    ">Para mas informacion del empleado cliquear en su nombre </h3>
+    <h4 class="p-3 mb-2 font-weight-bold ">Para mas informacion del empleado click en su nombre </h4>
 
-    <div class="container mt-5">
+    <div class="container mt-3">
             <table class="table">
                     <thead>
                       <tr>
@@ -42,32 +42,41 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">Roberto</th>
-                        <td>Juarez</td>
-                        <td>23</td>
-                        <td>23/02/2019</td>
-                        <td>si</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Mark</th>
-                        <td>Jacob</td>
-                        <td>24</td>
-                        <td>24/02/2019</td>
-                        <td>no</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Otto</th>
-                        <td>Thompson</td>
-                        <td>28</td>
-                        <td>05/09/2019</td>
-                        <td>si</td>
-                      </tr>
-                    </tbody>
+                    @foreach ($empleados as $item)
+                        <tr>
+                        <th scope="row"><a href="{{ route('empleados',$item->nombre) }}">{{$item->nombre}}</a></th>
+                        <td>{{$item->apellido}}</td>
+                          <td>{{$item->edad}}</td>
+                          <td>{{$item->comienzo}}</td>
+                          <td>
+                             {{$item->asegurado ? 'Si' : 'No'}} 
+                          </td>
+                        </tr>    
+                    @endforeach
+                   </tbody>
                   </table>
     </div>
 </div>
 
+@if (!empty($empleado))
+
+<div class="container mt-3 mb-3">
+    <div class="card text-center">
+        <div class="card-header font-weight-bold text-uppercase">
+          {{$empleado}}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Editar Empleado</a>
+        </div>
+        <div class="card-footer text-muted">
+          ->Aca va la fecha que empezo<-
+        </div>
+      </div>
+</div>
+    
+@endif
 
 @endsection
 
