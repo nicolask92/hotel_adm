@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Titulo</title>
+<title>Administrador Hotelero | {{    Request::path()    }}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
@@ -16,17 +16,23 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item active">
+            <li class="nav-item {{ Route::is('inicio') ? 'active' : "" }}">
             <a class="nav-link" href="{{    route('inicio')     }}">Inicio <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {{ Route::is('crono') ? 'active' : '' }}">
               <a class="nav-link" href="{{    route('crono')     }}">Cronograma</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{    route('empleados')     }}">Empleados</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{    route('pago-servicios')     }}">Pago de Servicios</a>
+            <li class="nav-item dropdown {{ Route::is('empleados') ? 'active' : "" }}">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Empleados
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{{    route('empleados')     }}">Empleados</a>
+                  <a class="dropdown-item" href="#">Empleados Inactivos</a>
+                </div>
+              </li>
+            <li class="nav-item {{ Route::is('pago_servicios') ? 'active' : "" }}">
+                <a class="nav-link" href="{{    route('pago_servicios')     }}">Pago de Servicios</a>
               </li>
           </ul>
         </div>
