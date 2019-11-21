@@ -61,7 +61,7 @@
                     </thead>
                     <tbody>
                           @foreach ($empleados_lista as $item)
-                            @if($item->activo == null || $item->activo == "Si")
+                            @if(  $item->activo == "Si" )
                               <tr>
                               <th scope="row"><a href="{{ route('empleados',$item->id) }}">{{$item->nombre}}</a></th>
                               <td>{{$item->apellido}}</td>
@@ -104,14 +104,17 @@
                       </div>
                       <div class="col-sm">
                         <p><span class="font-weight-bold">Edad:</span> {{ $empleado->edad}}</p>
-                        <p><span class="font-weight-bold">Finalizo:</span> {{ $empleado->finalizo != null ? $empleado->finalizo : "Activo" }}</p></p>
+                        <p><span class="font-weight-bold">Finalizo:</span> {{ $empleado->finalizo != null ? $empleado->finalizo : "Trabajando" }}</p></p>
                         <p><span class="font-weight-bold">Agregado el Dia:</span> {{ $empleado->created_at}}</p>
-                        <p><span class="font-weight-bold">Activo:</span> {{ $empleado->finalizo != null ? $empleado->finalizo : "Si" }}</p>
+                        <p><span class="font-weight-bold">Activo:</span> {{ $empleado->finalizo != null ? "No" : "Si" }}</p>
+                        <p><span class="font-weight-bold">Nota:</span> {{ $empleado->notas }}</p>
                       </div>
                     </div>
                   </div>
-                  <a href="#" class="btn btn-primary">Editar Empleado</a>
-                  <a href="{{route('baja_empleados', $empleado->id)}}" class="btn btn-primary">Dejar Inactivo</a>
+                  <a href="{{route('empleados.editando', $empleado->id)}}" class="btn btn-primary">Editar Empleado</a>
+                  @if(!$empleado->finalizo)
+                  <a href="{{route('empleados.bajar', $empleado->id)}}" class="btn btn-primary">Dejar Inactivo</a>
+                  @endif
             </div>
             
             <div class="card-footer text-muted">
