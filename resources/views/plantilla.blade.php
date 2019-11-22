@@ -28,7 +28,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="{{    route('empleados')     }}">Empleados</a>
-                  <a class="dropdown-item" href="#">Empleados Inactivos</a>
+                  <a class="dropdown-item" href="{{    route('empleados.historial')     }}">Empleados Inactivos</a>
                 </div>
               </li>
             <li class="nav-item {{ Route::is('pago_servicios') ? 'active' : "" }}">

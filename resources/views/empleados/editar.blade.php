@@ -10,9 +10,16 @@
                     {{ session('mensaje') }}
                 </div>
                 @endif
+
+                @if ($errors->any())
+                <div class="alert alert-warning">
+                    Problemas
+                </div>
+                @endif
+
             <h4 class="mb-5">EDITAR EMPLEADO:</h4>
             <h5>{{ $user_edit->nombre }} {{ $user_edit->apellido }}</h5>
-            <form action="{{route('empleados.editado', $user_edit->id)}}" method="POST" >
+            <form action="{{route('empleados.editado', $user_edit->id)}}" method="POST" enctype="multipart/form-data" >
                 @method('PUT')
                 @csrf
                
@@ -52,16 +59,17 @@
                     <div class="form-row">
                             <div class="form-group col-md-6">
                                     <label for="inputPassword4">Foto</label>
-                                    <img src="{{ $user_edit->foto ? $user_edit->foto : "http://www.losprincipios.org/images/default.jpg"}}" class="card-img-top" alt="...">
+                                    <img class="w-75 img-fluid img-thumbnail rounded mx-auto d-block" src="{{ $user_edit->foto ? URL::asset('/fotos_empleados')  .  "/" . $user_edit->foto : URL::asset('/fotos_empleados/default.jpg')}}" class="card-img-top" alt="...">
                                     <div class="custom-file  mt-3">
-                                          <input type="file" class="custom-file-input" id="customFileLang" lang="es">
+                                          <input type="file" name="image" class="custom-file-input" id="customFileLang" lang="es">
                                           <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
                                     </div>
                                   </div>
-                            <div class="form-group col-md-6">
+
+                    <div class="form-group col-md-6">
                               <label for="inputEmail4">Notas</label>
                               <input type="text" name="notas" value="{{ $user_edit->notas }}"class="form-control" placeholder="Notas">
-                            </div>
+                    </div>
                             
                     </div>
 

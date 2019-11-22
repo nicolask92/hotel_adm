@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
+use App\Traits\UploadTrait;
 
 class ControladordeVistas extends Controller
 {
+    use UploadTrait;
+
+
     public function inicio (){
         return view('index');
     }
@@ -96,6 +101,12 @@ class ControladordeVistas extends Controller
 
     public function editado(Request $request ,$id_baja)    {
 
+        request()->validate([
+
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+
+        ]);
+
         
         $empleado_a_editar = App\Empleados::find($id_baja);
 
@@ -118,6 +129,24 @@ class ControladordeVistas extends Controller
         else{
         $empleado_a_editar->activo = "Si";
         }
+
+        if ($request->has('image')) {
+            // Get image file
+            $image = $request->file('image');
+            // Make a image name based on user name and current timestamp
+            $name = Str::slug($empleado_a_editar->apellido).'_'.time();
+            // Define folder path
+            $folder = '/fotos_empleados';
+            // Make a file path where image will be stored [ folder path + file name + file extension]
+            $filePath = $name. '.' . $image->getClientOriginalExtension();
+            // Upload image
+            $this->uploadOne($image, $folder, 'public', $name);
+            // Set user profile image path in database to filePath
+            $empleado_a_editar->foto = $filePath;
+        }
+
+        //$fileExtension->move(public_path('fotos_empleados'), $imageName);
+        //$empleado_a_editar->foto = $imageName;
 
         $empleado_a_editar->save();
 

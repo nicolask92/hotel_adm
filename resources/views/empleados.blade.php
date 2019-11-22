@@ -5,7 +5,7 @@
 
     <div class="container border p-3 mt-5">
         <h4>AGREGAR EMPLEADO</h4>
-        <form method="POST" action="{{route('agregar_empleado')}}">
+        <form method="POST" autocomplete="off" action="{{route('agregar_empleado')}}">
             @if($errors->has('nombre_add')|| $errors->has('apellido_add')||$errors->has('dni_add')||$errors->has('date'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
               Los campos son obligatorios

@@ -17,3 +17,8 @@ Route::put('/empleado/bajado/{id}','ControladordeVistas@bajado')->name('empleado
 Route::get('/empleado/editar/{id}','ControladordeVistas@editando')->name('empleados.editando');
 
 Route::put('/empleado/editado/{id_baja}','ControladordeVistas@editado')->name('empleados.editado');
+
+Route::resource('hitorial_empleados', 'HistorialEmpleados')->names([
+    'index' => 'empleados.historial'
+]);
+
